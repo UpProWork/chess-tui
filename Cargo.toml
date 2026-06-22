@@ -1,0 +1,91 @@
+[package]
+name = "chess-tui"
+version = "2.7.1"
+authors = ["Thomas Mauran"]
+license = "MIT"
+edition = "2024"
+description = "Play chess in the terminal. Rust TUI, Stockfish, Lichess."
+keywords = ["chess", "tui", "terminal", "lichess", "uci"]
+readme = "README.md"
+homepage = "https://thomas-mauran.github.io/chess-tui/"
+repository = "https://github.com/thomas-mauran/chess-tui"
+documentation = "https://thomas-mauran.github.io/chess-tui/docs/intro"
+exclude = [
+  "examples/*.gif",
+  "examples/*.tape",
+  "examples/screenshot.png",
+  "scripts/",
+  ".github/",
+  "Dockerfile",
+  "cliff.toml",
+  "cargo-generate.toml",
+  "website/",
+]
+
+[dependencies]
+clap = { version = "4.6.1", features = ["derive"] }
+dirs = "6.0.0"
+ratatui = { version = "0.30.0", features = ["serde"] }
+ruci = { version = "2.1.0", features = ["engine-sync"] }
+toml = "1.1.2"
+log = "0.4.32"
+simplelog = "0.12.2"
+chrono = "0.4.39"
+shakmaty = "0.27.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.13", features = ["blocking", "json", "form"] }
+rodio = { version = "0.22", optional = true }
+rand = "0.10.1"
+throbber-widgets-tui = "0.11.0"
+tachyonfx = "0.25.0"
+
+[dev-dependencies]
+tempfile = "3.8"
+
+[features]
+sound = ["rodio"]
+default = ["sound"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "z"
+strip = true
+
+[lints.clippy]
+correctness = { level = "deny", priority = -1 }
+suspicious = { level = "deny", priority = -1 }
+
+style = "warn"
+complexity = "warn"
+perf = "warn"
+
+unwrap_used = "warn"
+expect_used = "warn"
+todo = "warn"
+dbg_macro = "warn"
+
+[package.metadata.deb]
+# Configuration for cargo-deb (alternative packaging method)
+# Install with: cargo install cargo-deb
+# Build with: cargo deb
+maintainer = "Thomas Mauran <thomasmauran@yahoo.com>"
+copyright = "2023-2026, Thomas Mauran"
+license-file = ["LICENSE"]
+extended-description = """\
+chess-tui is a free, open-source terminal chess game written in Rust. Play chess in your terminal (CLI) with:
+
+- Local 2-player mode
+- Any UCI chess engine (e.g. Stockfish, GNU Chess)
+- Online play via Lichess integration
+- Online multiplayer
+- Custom skins and piece styles
+- macOS, Linux, and Windows
+
+Install: cargo install chess-tui or brew install thomas-mauran/tap/chess-tui
+Docs: https://thomas-mauran.github.io/chess-tui/
+"""
+section = "games"
+priority = "optional"
+depends = "$auto"
