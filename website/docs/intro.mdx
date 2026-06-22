@@ -1,0 +1,44 @@
+---
+sidebar_position: 1
+description: "Get started with Chess TUI - the open-source terminal chess game written in Rust with Lichess integration."
+---
+
+# Getting Started
+
+import Logo from '/img/logo.png';
+
+<div className="intro-header">
+  <div className="intro-logo">
+    <img src={Logo} alt="logo" width="200" />
+  </div>
+  <div className="intro-content">
+    ### Welcome to the chess-tui documentation!
+
+    Chess-tui is a simple chess game you can play from your terminal. It supports local 2 players mode, online multiplayer, playing against any UCI compatible chess engine, Lichess integration, custom skins and more!
+
+    This documentation will guide you through the different features of the game and how to install it. For keyboard shortcuts, see the [Keyboard Shortcuts](/docs/Usage/keyboard-shortcuts) page.
+  </div>
+</div>
+
+## Quick Install
+
+**Homebrew:**
+```bash
+brew install thomas-mauran/tap/chess-tui
+```
+
+**Debian/Ubuntu:**
+```bash
+DEB_URL=$(curl -s "https://api.github.com/repos/thomas-mauran/chess-tui/releases/latest" | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url') && curl -LO "$DEB_URL" && sudo dpkg -i "$(basename "$DEB_URL")" && sudo apt-get install -f
+```
+
+**Cargo:**
+```bash
+cargo install chess-tui
+```
+
+For installation via package managers or other methods, see the [Installation Guide](/docs/Installation/Packaging%20status).
+
+---
+
+Logo and illustrations by [everwinter](https://www.fiverr.com/everwinter). See the full [Credits](/docs/credits) page.
